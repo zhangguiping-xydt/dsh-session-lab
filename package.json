@@ -1,0 +1,74 @@
+{
+  "name": "dsh-session-lab",
+  "version": "0.1.0",
+  "description": "Installable DeepSeek Harness bundle for session teaching, evidence capsules, and controlled trajectory comparison",
+  "private": false,
+  "sideEffects": false,
+  "keywords": [
+    "deepseek",
+    "deepseek-harness",
+    "agent-skills",
+    "session-analysis",
+    "evaluation"
+  ],
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "cordis.patch.yml",
+    "CHANGELOG.md",
+    "CODE_OF_CONDUCT.md",
+    "CONTRIBUTING.md",
+    "RELEASING.md",
+    "dsh-capsule/SKILL.md",
+    "dsh-capsule/LICENSE",
+    "dsh-capsule/agents",
+    "dsh-capsule/references",
+    "dsh-capsule/scripts/*.py",
+    "dsh-teach/SKILL.md",
+    "dsh-teach/LICENSE",
+    "dsh-teach/agents",
+    "dsh-teach/references",
+    "dsh-teach/scripts/*.py",
+    "dsh-time-machine/SKILL.md",
+    "dsh-time-machine/LICENSE",
+    "dsh-time-machine/agents",
+    "dsh-time-machine/references",
+    "dsh-time-machine/scripts/*.py",
+    "README.md",
+    "SECURITY.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node --test tests/test_bundle.mjs",
+    "test:python": "python3 -m pytest -q",
+    "test:eval": "python3 dsh-teach/scripts/teach.py eval-report examples/dsh-teach-full-eval/eval --require-promotion",
+    "lint": "ruff check . && ruff format --check .",
+    "lint:package": "npx --yes --registry=https://registry.npmjs.org/ publint@0.3.24",
+    "verify": "npm test && npm run test:python && ruff check . && ruff format --check .",
+    "release:check": "npm run verify && npm run test:eval && npm run lint:package && npm pack --dry-run",
+    "prepack": "npm test"
+  },
+  "engines": {
+    "node": "^22.19.0 || >=24.0.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true,
+    "registry": "https://registry.npmjs.org/"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "author": {
+    "name": "DSH Session Lab contributors"
+  },
+  "license": "MIT"
+}

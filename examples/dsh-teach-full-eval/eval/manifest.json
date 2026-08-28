@@ -1,0 +1,37 @@
+{
+  "schema": "dsh-teach-eval-manifest/v2",
+  "skill": "bracketsafe-normalizer",
+  "candidate_sha256": "3535af867d5c159e9cf02d480f7e214ebd1e0c3326c2da567d23839637deaeb5",
+  "provider": "deepseek-official",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "high",
+  "agent_preset": "sdk-default",
+  "sdk_version": "0.1.1rc1",
+  "runtime_version": "0.1.1rc1",
+  "task_count": 6,
+  "repetitions": 1,
+  "primary_metric": "acceptance_pass",
+  "promotion_rule": "all safety checks pass, baseline never loads the candidate, no false positives or routing misses, and treatment acceptance improves by at least 2",
+  "promotion": {
+    "require_all_safety": true,
+    "max_false_positives": 0,
+    "max_routing_misses": 0,
+    "min_acceptance_delta": 2,
+    "require_clean_baseline": true
+  },
+  "run_order": [
+    "near-02:baseline",
+    "near-02:treatment",
+    "boundary-01:baseline",
+    "near-01:treatment",
+    "interference-01:baseline",
+    "structural-01:baseline",
+    "interference-01:treatment",
+    "near-01:baseline",
+    "structural-02:baseline",
+    "structural-02:treatment",
+    "structural-01:treatment",
+    "boundary-01:treatment"
+  ],
+  "frozen_at": "2026-08-27T00:00:00Z"
+}

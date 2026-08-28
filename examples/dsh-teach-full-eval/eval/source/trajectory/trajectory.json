@@ -1,0 +1,1144 @@
+{
+  "schema": "dsh-teach-trajectory/v1",
+  "source_name": "source.dshc",
+  "source_sha256": "d1ffbb28859da7cb3c9a5d51211a17799532710ffe238622837e9de34861b959",
+  "sessions": [
+    {
+      "member": "sessions/session-001/session.jsonl",
+      "header": {
+        "id_hash": "4e9bb9f661912a46",
+        "version": 0,
+        "created_at": 1787819203136,
+        "cwd": "<WORKSPACE>",
+        "parent_present": false,
+        "seed_length": null,
+        "origin": null,
+        "delegation_depth": 0,
+        "agent_preset": null
+      },
+      "event_count": 155,
+      "event_types": {
+        "agent/inbox/spliced": 2,
+        "assistant/chunk": 143,
+        "assistant/message": 1,
+        "request/context": 1,
+        "request/header": 1,
+        "session/title": 1,
+        "step/end": 1,
+        "step/start": 1,
+        "turn/end": 1,
+        "turn/start": 1,
+        "user/message": 2
+      },
+      "turn_outcomes": [
+        {
+          "seq": 154,
+          "turn": 1,
+          "reason": "completed",
+          "completed": true
+        }
+      ],
+      "user_messages": [
+        {
+          "seq": 4,
+          "turn": null,
+          "preview": "text Use this BracketSafe contract: trim Unicode whitespace; return BRACKETSAFE_EMPTY if empty; collapse remaining whitespace runs to one underscore; lowercase ASCII A-Z; preserve other characters; wrap with [[ and ]]. Apply it to ` Hello …"
+        },
+        {
+          "seq": 5,
+          "turn": null,
+          "preview": "text <system-reminder> A skill is a reusable set of task-specific instructions. The following skills are available in this session: <available_skills> - `autoreview`: Structured Codex, Claude, Amp, Pi, or Kimi code review when explicitly r…"
+        }
+      ],
+      "tools": [],
+      "heuristic_test_signal_count": 0,
+      "events": [
+        {
+          "seq": 0,
+          "type": "agent/inbox/spliced",
+          "turn": null,
+          "step": null,
+          "preview": "next-turn text Use this BracketSafe contract: trim Unicode whitespace; return BRACKETSAFE_EMPTY if empty; collapse remaining whitespace runs to one underscore; lowercase ASCII A-Z; preserve other characters; wrap with [[ and ]]. Apply it t…"
+        },
+        {
+          "seq": 1,
+          "type": "turn/start",
+          "turn": 1,
+          "step": null,
+          "preview": ""
+        },
+        {
+          "seq": 2,
+          "type": "agent/inbox/spliced",
+          "turn": null,
+          "step": null,
+          "preview": "next-turn"
+        },
+        {
+          "seq": 3,
+          "type": "step/start",
+          "turn": 1,
+          "step": 1,
+          "preview": ""
+        },
+        {
+          "seq": 4,
+          "type": "user/message",
+          "turn": null,
+          "step": null,
+          "preview": "text Use this BracketSafe contract: trim Unicode whitespace; return BRACKETSAFE_EMPTY if empty; collapse remaining whitespace runs to one underscore; lowercase ASCII A-Z; preserve other characters; wrap with [[ and ]]. Apply it to ` Hello …"
+        },
+        {
+          "seq": 5,
+          "type": "user/message",
+          "turn": null,
+          "step": null,
+          "preview": "text <system-reminder> A skill is a reusable set of task-specific instructions. The following skills are available in this session: <available_skills> - `autoreview`: Structured Codex, Claude, Amp, Pi, or Kimi code review when explicitly r…"
+        },
+        {
+          "seq": 6,
+          "type": "session/title",
+          "turn": null,
+          "step": null,
+          "preview": "Use this BracketSafe contract: trim fallback"
+        },
+        {
+          "seq": 7,
+          "type": "request/header",
+          "turn": null,
+          "step": null,
+          "preview": "deepseek-official deepseek-v4-flash high You are an AI agent powered by DeepSeek Harness. Check the [exit code: N] marker on every bash result; investigate failures before moving on. Track every background job id you start. You are notifie…"
+        },
+        {
+          "seq": 8,
+          "type": "request/context",
+          "turn": null,
+          "step": null,
+          "preview": "deepseek-official deepseek-v4-flash"
+        },
+        {
+          "seq": 9,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "block-start reasoning"
+        },
+        {
+          "seq": 10,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta The"
+        },
+        {
+          "seq": 11,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta task"
+        },
+        {
+          "seq": 12,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta :"
+        },
+        {
+          "seq": 13,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta Apply"
+        },
+        {
+          "seq": 14,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta the"
+        },
+        {
+          "seq": 15,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta B"
+        },
+        {
+          "seq": 16,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta racket"
+        },
+        {
+          "seq": 17,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta Safe"
+        },
+        {
+          "seq": 18,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta contract"
+        },
+        {
+          "seq": 19,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta to"
+        },
+        {
+          "seq": 20,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta \""
+        },
+        {
+          "seq": 21,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta Hello"
+        },
+        {
+          "seq": 22,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta"
+        },
+        {
+          "seq": 23,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta D"
+        },
+        {
+          "seq": 24,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta SH"
+        },
+        {
+          "seq": 25,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta \""
+        },
+        {
+          "seq": 26,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta ."
+        },
+        {
+          "seq": 27,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta Contract"
+        },
+        {
+          "seq": 28,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta :"
+        },
+        {
+          "seq": 29,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta 1"
+        },
+        {
+          "seq": 30,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta ."
+        },
+        {
+          "seq": 31,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta Trim"
+        },
+        {
+          "seq": 32,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta Unicode"
+        },
+        {
+          "seq": 33,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta whites"
+        },
+        {
+          "seq": 34,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta pace"
+        },
+        {
+          "seq": 35,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta →"
+        },
+        {
+          "seq": 36,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta \""
+        },
+        {
+          "seq": 37,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta Hello"
+        },
+        {
+          "seq": 38,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta"
+        },
+        {
+          "seq": 39,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta D"
+        },
+        {
+          "seq": 40,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta SH"
+        },
+        {
+          "seq": 41,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta \""
+        },
+        {
+          "seq": 42,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta 2"
+        },
+        {
+          "seq": 43,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta ."
+        },
+        {
+          "seq": 44,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta Return"
+        },
+        {
+          "seq": 45,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta BR"
+        },
+        {
+          "seq": 46,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta ACK"
+        },
+        {
+          "seq": 47,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta ET"
+        },
+        {
+          "seq": 48,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta SA"
+        },
+        {
+          "seq": 49,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta FE"
+        },
+        {
+          "seq": 50,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta _"
+        },
+        {
+          "seq": 51,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta EM"
+        },
+        {
+          "seq": 52,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta PT"
+        },
+        {
+          "seq": 53,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta Y"
+        },
+        {
+          "seq": 54,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta if"
+        },
+        {
+          "seq": 55,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta empty"
+        },
+        {
+          "seq": 56,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta →"
+        },
+        {
+          "seq": 57,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta not"
+        },
+        {
+          "seq": 58,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta empty"
+        },
+        {
+          "seq": 59,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta"
+        },
+        {
+          "seq": 60,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta 3"
+        },
+        {
+          "seq": 61,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta ."
+        },
+        {
+          "seq": 62,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta Coll"
+        },
+        {
+          "seq": 63,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta apse"
+        },
+        {
+          "seq": 64,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta remaining"
+        },
+        {
+          "seq": 65,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta whites"
+        },
+        {
+          "seq": 66,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta pace"
+        },
+        {
+          "seq": 67,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta runs"
+        },
+        {
+          "seq": 68,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta to"
+        },
+        {
+          "seq": 69,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta one"
+        },
+        {
+          "seq": 70,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta underscore"
+        },
+        {
+          "seq": 71,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta →"
+        },
+        {
+          "seq": 72,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta \""
+        },
+        {
+          "seq": 73,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta Hello"
+        },
+        {
+          "seq": 74,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta _"
+        },
+        {
+          "seq": 75,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta DS"
+        },
+        {
+          "seq": 76,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta H"
+        },
+        {
+          "seq": 77,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta \""
+        },
+        {
+          "seq": 78,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta 4"
+        },
+        {
+          "seq": 79,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta ."
+        },
+        {
+          "seq": 80,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta Lower"
+        },
+        {
+          "seq": 81,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta case"
+        },
+        {
+          "seq": 82,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta ASCII"
+        },
+        {
+          "seq": 83,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta A"
+        },
+        {
+          "seq": 84,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta -Z"
+        },
+        {
+          "seq": 85,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta →"
+        },
+        {
+          "seq": 86,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta \""
+        },
+        {
+          "seq": 87,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta hello"
+        },
+        {
+          "seq": 88,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta _d"
+        },
+        {
+          "seq": 89,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta sh"
+        },
+        {
+          "seq": 90,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta \""
+        },
+        {
+          "seq": 91,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta 5"
+        },
+        {
+          "seq": 92,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta ."
+        },
+        {
+          "seq": 93,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta Pres"
+        },
+        {
+          "seq": 94,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta erve"
+        },
+        {
+          "seq": 95,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta other"
+        },
+        {
+          "seq": 96,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta characters"
+        },
+        {
+          "seq": 97,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta"
+        },
+        {
+          "seq": 98,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta 6"
+        },
+        {
+          "seq": 99,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta ."
+        },
+        {
+          "seq": 100,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta Wrap"
+        },
+        {
+          "seq": 101,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta with"
+        },
+        {
+          "seq": 102,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta [["
+        },
+        {
+          "seq": 103,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta and"
+        },
+        {
+          "seq": 104,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta ]]"
+        },
+        {
+          "seq": 105,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta →"
+        },
+        {
+          "seq": 106,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta \""
+        },
+        {
+          "seq": 107,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta [["
+        },
+        {
+          "seq": 108,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta hello"
+        },
+        {
+          "seq": 109,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta _d"
+        },
+        {
+          "seq": 110,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta sh"
+        },
+        {
+          "seq": 111,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta ]]"
+        },
+        {
+          "seq": 112,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta \""
+        },
+        {
+          "seq": 113,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta This"
+        },
+        {
+          "seq": 114,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta is"
+        },
+        {
+          "seq": 115,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta simple"
+        },
+        {
+          "seq": 116,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta ."
+        },
+        {
+          "seq": 117,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta No"
+        },
+        {
+          "seq": 118,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta skill"
+        },
+        {
+          "seq": 119,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta needed"
+        },
+        {
+          "seq": 120,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta —"
+        },
+        {
+          "seq": 121,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta none"
+        },
+        {
+          "seq": 122,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta of"
+        },
+        {
+          "seq": 123,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta the"
+        },
+        {
+          "seq": 124,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta available"
+        },
+        {
+          "seq": 125,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta skills"
+        },
+        {
+          "seq": 126,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta match"
+        },
+        {
+          "seq": 127,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta this"
+        },
+        {
+          "seq": 128,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta trivial"
+        },
+        {
+          "seq": 129,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta transformation"
+        },
+        {
+          "seq": 130,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta ."
+        },
+        {
+          "seq": 131,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta Reply"
+        },
+        {
+          "seq": 132,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta only"
+        },
+        {
+          "seq": 133,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta with"
+        },
+        {
+          "seq": 134,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta the"
+        },
+        {
+          "seq": 135,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta result"
+        },
+        {
+          "seq": 136,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta :"
+        },
+        {
+          "seq": 137,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta [["
+        },
+        {
+          "seq": 138,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta hello"
+        },
+        {
+          "seq": 139,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta _d"
+        },
+        {
+          "seq": 140,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta sh"
+        },
+        {
+          "seq": 141,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "reasoning-delta ]]"
+        },
+        {
+          "seq": 142,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "block-start text"
+        },
+        {
+          "seq": 143,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "text-delta [["
+        },
+        {
+          "seq": 144,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "text-delta hello"
+        },
+        {
+          "seq": 145,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "text-delta _d"
+        },
+        {
+          "seq": 146,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "text-delta sh"
+        },
+        {
+          "seq": 147,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "text-delta ]]"
+        },
+        {
+          "seq": 148,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "block-end reasoning The task: Apply the BracketSafe contract to \" Hello DSH \". Contract: 1. Trim Unicode whitespace → \"Hello DSH\" 2. Return BRACKETSAFE_EMPTY if empty → not empty 3. Collapse remaining whitespace runs to one underscore → \"H…"
+        },
+        {
+          "seq": 149,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "block-end text [[hello_dsh]]"
+        },
+        {
+          "seq": 150,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "usage"
+        },
+        {
+          "seq": 151,
+          "type": "assistant/chunk",
+          "turn": 1,
+          "step": 1,
+          "preview": "finish stop"
+        },
+        {
+          "seq": 152,
+          "type": "assistant/message",
+          "turn": 1,
+          "step": 1,
+          "preview": "assistant reasoning The task: Apply the BracketSafe contract to \" Hello DSH \". Contract: 1. Trim Unicode whitespace → \"Hello DSH\" 2. Return BRACKETSAFE_EMPTY if empty → not empty 3. Collapse remaining whitespace runs to one underscore → \"H…"
+        },
+        {
+          "seq": 153,
+          "type": "step/end",
+          "turn": 1,
+          "step": 1,
+          "preview": ""
+        },
+        {
+          "seq": 154,
+          "type": "turn/end",
+          "turn": 1,
+          "step": null,
+          "preview": "completed"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+interface:
+  display_name: "DSH Time Machine"
+  short_description: "比较受控 DSH 分支轨迹并分析工具与资源差异"
+  default_prompt: "Use $dsh-time-machine to compare these controlled DSH trajectories from a shared completed-turn cut."
+
+policy:
+  allow_implicit_invocation: true

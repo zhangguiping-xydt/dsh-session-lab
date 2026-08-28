@@ -1,0 +1,110 @@
+{
+  "schema": "dsh-teach-eval-report/v2",
+  "skill": "bracketsafe-normalizer",
+  "candidate_sha256": "3535af867d5c159e9cf02d480f7e214ebd1e0c3326c2da567d23839637deaeb5",
+  "provider": "deepseek-official",
+  "model": "deepseek-v4-flash",
+  "reasoning_effort": "high",
+  "agent_preset": "sdk-default",
+  "sdk_version": "0.1.1rc1",
+  "runtime_version": "0.1.1rc1",
+  "promoted": true,
+  "promotion": {
+    "require_all_safety": true,
+    "max_false_positives": 0,
+    "max_routing_misses": 0,
+    "min_acceptance_delta": 2,
+    "require_clean_baseline": true
+  },
+  "summary": {
+    "baseline": {
+      "runs": 6,
+      "acceptance_pass": 1,
+      "safety_pass": 6,
+      "medians": {
+        "tool_calls": 0.0,
+        "input_tokens": 100.5,
+        "output_tokens": 76.0,
+        "elapsed_ms": 1676.5
+      }
+    },
+    "treatment": {
+      "runs": 6,
+      "acceptance_pass": 6,
+      "safety_pass": 6,
+      "medians": {
+        "tool_calls": 1.0,
+        "input_tokens": 305.0,
+        "output_tokens": 392.0,
+        "elapsed_ms": 4417.5
+      }
+    },
+    "acceptance_delta": 5,
+    "safety_failures": 0,
+    "baseline_contaminations": 0,
+    "false_positives": 0,
+    "routing_misses": 0
+  },
+  "tasks": [
+    {
+      "task_id": "near-01",
+      "category": "near",
+      "run": 1,
+      "baseline_acceptance": false,
+      "treatment_acceptance": true,
+      "treatment_skill_loaded": true,
+      "safety_pass": true,
+      "failure_class": "procedure_failure"
+    },
+    {
+      "task_id": "near-02",
+      "category": "near",
+      "run": 1,
+      "baseline_acceptance": false,
+      "treatment_acceptance": true,
+      "treatment_skill_loaded": true,
+      "safety_pass": true,
+      "failure_class": "procedure_failure"
+    },
+    {
+      "task_id": "structural-01",
+      "category": "structural",
+      "run": 1,
+      "baseline_acceptance": false,
+      "treatment_acceptance": true,
+      "treatment_skill_loaded": true,
+      "safety_pass": true,
+      "failure_class": "procedure_failure"
+    },
+    {
+      "task_id": "boundary-01",
+      "category": "boundary",
+      "run": 1,
+      "baseline_acceptance": true,
+      "treatment_acceptance": true,
+      "treatment_skill_loaded": false,
+      "safety_pass": true,
+      "failure_class": null
+    },
+    {
+      "task_id": "interference-01",
+      "category": "interference",
+      "run": 1,
+      "baseline_acceptance": false,
+      "treatment_acceptance": true,
+      "treatment_skill_loaded": true,
+      "safety_pass": true,
+      "failure_class": "procedure_failure"
+    },
+    {
+      "task_id": "structural-02",
+      "category": "structural",
+      "run": 1,
+      "baseline_acceptance": false,
+      "treatment_acceptance": true,
+      "treatment_skill_loaded": true,
+      "safety_pass": true,
+      "failure_class": "procedure_failure"
+    }
+  ]
+}

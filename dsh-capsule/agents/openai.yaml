@@ -1,0 +1,7 @@
+interface:
+  display_name: "DSH Capsule"
+  short_description: "安全打包、脱敏并校验可分享的 DSH 会话胶囊"
+  default_prompt: "Use $dsh-capsule to package this DSH export into a verified, privacy-reviewed .dshc evidence bundle."
+
+policy:
+  allow_implicit_invocation: true

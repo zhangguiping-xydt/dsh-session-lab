@@ -1,0 +1,7 @@
+interface:
+  display_name: "DSH Teach"
+  short_description: "从 DSH 会话提炼并独立验证可复用的 Agent Skill"
+  default_prompt: "Use $dsh-teach to turn this successful DSH session into a redacted, independently evaluated Skill."
+
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,5 @@
+# Register the three packaged workflow skills in the host skill registry.
+# Runtime registration is independent of workspace-local filesystem discovery.
+- insert:
+    - id: dsh-session-lab
+      name: dsh-session-lab
