@@ -67,6 +67,14 @@
       "patch": "./cordis.patch.yml"
     }
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhangguiping-xydt/dsh-session-lab.git"
+  },
+  "homepage": "https://github.com/zhangguiping-xydt/dsh-session-lab#readme",
+  "bugs": {
+    "url": "https://github.com/zhangguiping-xydt/dsh-session-lab/issues"
+  },
   "author": {
     "name": "DSH Session Lab contributors"
   },

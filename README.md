@@ -14,7 +14,19 @@ Requirements: Node.js 22.19+ (or 24+) for DSH/plugin installation and Python 3.1
 
 ## Install
 
-From this source checkout:
+Install directly from GitHub into an existing DSH profile:
+
+```bash
+dsh plugin --profile web add github:zhangguiping-xydt/dsh-session-lab
+```
+
+If the `dsh` command is not installed globally, run the latest published CLI through `npx`:
+
+```bash
+npx --yes @deepseek-ai/dsh@latest plugin --profile web add github:zhangguiping-xydt/dsh-session-lab
+```
+
+For local development from a source checkout:
 
 ```bash
 dsh plugin --profile web add /absolute/path/to/dsh-session-lab
