@@ -49,6 +49,8 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: 24
+      - run: npm install --global --registry=https://registry.npmjs.org pnpm@11.23.0
+      - run: pnpm --version
       - run: npm ci --ignore-scripts
       - run: npm test
       - run: npm audit --omit=dev --audit-level=high
