@@ -49,7 +49,10 @@ jobs:
       - run: npm audit --omit=dev --audit-level=high
       - run: npm run lint:package
       - name: Pack release tarball
-        run: echo "TARBALL=$(npm pack --silent)" >> "$GITHUB_ENV"
+        run: |
+          npm pack --silent
+          version="$(node -p "require('./package.json').version")"
+          printf 'TARBALL=dsh-session-lab-%s.tgz\n' "$version" >> "$GITHUB_ENV"
       - name: Install into latest DSH profile
         env:
           DSH_HOME: ${{ runner.temp }}/dsh-home
