@@ -43,6 +43,7 @@ jobs:
       # Pin the DSH release under test so CI remains reproducible; update this
       # when a new npm latest release is intentionally adopted.
       DSH_VERSION: 0.1.1-rc.2
+      NPM_CONFIG_REGISTRY: https://registry.npmjs.org
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
@@ -60,8 +61,8 @@ jobs:
       - name: Install into latest DSH profile
         env:
           DSH_HOME: ${{ runner.temp }}/dsh-home
-        run: npx --yes "@deepseek-ai/dsh@${DSH_VERSION}" plugin --profile headless add "./$TARBALL"
+        run: npx --yes --registry=https://registry.npmjs.org "@deepseek-ai/dsh@${DSH_VERSION}" plugin --profile headless add "./$TARBALL"
       - name: Verify composed bundle layer
         env:
           DSH_HOME: ${{ runner.temp }}/dsh-home
-        run: npx --yes "@deepseek-ai/dsh@${DSH_VERSION}" --profile headless --dump-config | grep -F '# == dsh-session-lab'
+        run: npx --yes --registry=https://registry.npmjs.org "@deepseek-ai/dsh@${DSH_VERSION}" --profile headless --dump-config | grep -F '# == dsh-session-lab'
