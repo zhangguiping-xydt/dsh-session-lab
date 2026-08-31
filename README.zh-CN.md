@@ -75,7 +75,7 @@ treatment 通过：6/6
 路由遗漏：0
 ```
 
-这是固定样例的回归证据，不是对所有项目和模型的保证。请阅读[完整报告](examples/dsh-teach-full-eval/eval/report.md) 和[评测协议](dsh-teach/references/evaluation-protocol.md)。
+这是固定样例的回归证据，不是对所有项目和模型的保证。请阅读[完整报告](examples/dsh-teach-full-eval/eval/report.md)、[中文案例说明](examples/dsh-teach-full-eval/CASE-STUDY.zh-CN.md) 和[评测协议](dsh-teach/references/evaluation-protocol.md)。
 
 ## 本地开发与验证
 

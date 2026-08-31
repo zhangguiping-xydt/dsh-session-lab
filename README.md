@@ -99,7 +99,7 @@ false positives:   0
 routing misses:    0
 ```
 
-This is an example evaluation, not a guarantee for every project or model. Re-run the protocol on your own tasks before promoting a generated Skill. See the [full report](examples/dsh-teach-full-eval/eval/report.md) and [evaluation protocol](dsh-teach/references/evaluation-protocol.md).
+This is an example evaluation, not a guarantee for every project or model. Re-run the protocol on your own tasks before promoting a generated Skill. See the [full report](examples/dsh-teach-full-eval/eval/report.md), [Chinese case study](examples/dsh-teach-full-eval/CASE-STUDY.zh-CN.md), and [evaluation protocol](dsh-teach/references/evaluation-protocol.md).
 
 ## Project map
 
