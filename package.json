@@ -41,6 +41,7 @@
     "dsh-time-machine/references",
     "dsh-time-machine/scripts/*.py",
     "README.md",
+    "README.zh-CN.md",
     "SECURITY.md",
     "LICENSE"
   ],

@@ -1,5 +1,7 @@
 # DSH Session Lab
 
+English | [中文](README.zh-CN.md)
+
 [![CI](https://github.com/zhangguiping-xydt/dsh-session-lab/actions/workflows/ci.yml/badge.svg)](https://github.com/zhangguiping-xydt/dsh-session-lab/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![DSH plugin](https://img.shields.io/badge/DeepSeek%20Harness-dsh--plugin-5b5bd6)](https://github.com/topics/dsh-plugin)
