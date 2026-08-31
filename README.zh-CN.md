@@ -1,5 +1,7 @@
 # DSH Session Lab
 
+> 面向 DeepSeek Harness 的会话证据打包、Skill 评测与受控轨迹对比工具包。
+
 [English](README.md) | 中文
 
 DSH Session Lab 是一个独立的 DeepSeek Harness（DSH）社区插件包，用于把一次成功的 Agent 会话转化为可分享的证据、可评测的 Skill 和可对比的受控实验。

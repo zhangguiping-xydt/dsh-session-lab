@@ -1,7 +1,7 @@
 {
   "name": "dsh-session-lab",
   "version": "0.1.0",
-  "description": "Installable DeepSeek Harness bundle for session teaching, evidence capsules, and controlled trajectory comparison",
+  "description": "Evidence packaging, Skill evaluation, and controlled trajectory comparison for DeepSeek Harness sessions",
   "private": false,
   "sideEffects": false,
   "keywords": [
@@ -9,6 +9,12 @@
     "deepseek-harness",
     "agent-skills",
     "session-analysis",
+    "session-evidence",
+    "skill-evaluation",
+    "trajectory-comparison",
+    "dsh-capsule",
+    "dsh-teach",
+    "dsh-time-machine",
     "evaluation"
   ],
   "type": "module",

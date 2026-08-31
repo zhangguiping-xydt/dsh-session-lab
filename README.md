@@ -1,5 +1,7 @@
 # DSH Session Lab
 
+> Evidence packaging, Skill evaluation, and controlled trajectory comparison for DeepSeek Harness sessions.
+
 English | [中文](README.zh-CN.md)
 
 [![CI](https://github.com/zhangguiping-xydt/dsh-session-lab/actions/workflows/ci.yml/badge.svg)](https://github.com/zhangguiping-xydt/dsh-session-lab/actions/workflows/ci.yml)
