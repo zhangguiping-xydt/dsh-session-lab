@@ -43,6 +43,10 @@ npx --yes @deepseek-ai/dsh@latest plugin --profile web add \
 dsh --profile web --dump-config | rg '# == dsh-session-lab'
 ```
 
+在 DSH Web UI 的“Settings → Plugins → Plugin list”中，也可以搜索并确认 `session-lab` 已显示为 Mounted、Enabled：
+
+![DSH Session Lab 已安装在 DSH Web UI 中](assets/dsh-plugin-installed.png)
+
 然后在会话中明确调用：
 
 ```text

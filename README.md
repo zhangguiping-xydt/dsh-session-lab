@@ -83,6 +83,10 @@ dsh --profile web --dump-config | rg '# == dsh-session-lab'
 
 The bundle uses the host `ctx.skills` registry, so it does not depend on project-directory watchers. A source-only alternative is to copy an individual directory under `<project>/.dsh/skills/` or `~/.dsh/skills/`; restart DSH if an existing session catalog does not refresh.
 
+After installation, the bundle appears as a mounted and enabled `session-lab` entry in **Settings → Plugins → Plugin list**:
+
+![DSH Session Lab installed in the DSH Web UI](assets/dsh-plugin-installed.png)
+
 ## What the reports look like
 
 The public evaluation fixture for `dsh-teach` contains six paired tasks and twelve fresh DSH sessions:
