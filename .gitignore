@@ -9,3 +9,8 @@ __pycache__/
 dist/
 build/
 /deepseek-harness/
+
+.loreloop/
+/workspace/baseline/
+/workspace/baseline*.zip
+/workspace/change/

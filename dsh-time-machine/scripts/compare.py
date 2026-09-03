@@ -37,8 +37,8 @@ SECRET_PATTERNS = (
     (re.compile(r"\bxox[baprs]-[A-Za-z0-9-]{10,}\b"), "<REDACTED_SLACK_TOKEN>"),
     (re.compile(r"\beyJ[A-Za-z0-9_-]{4,}\.[A-Za-z0-9_-]{4,}\.[A-Za-z0-9_-]{4,}\b"), "<REDACTED_JWT>"),
     (
-        re.compile(rf"(?i)\b({SENSITIVE_FIELD_PATTERN})\s*[:=]\s*['\"]?[^\s'\",;]{{8,}}"),
-        r"\1=<REDACTED>",
+        re.compile(rf"(?i)\b({SENSITIVE_FIELD_PATTERN}['\"]?\s*[:=]\s*['\"]?)[^\s'\",;]{{8,}}"),
+        r"\1<REDACTED>",
     ),
 )
 SECRET_KEYS = re.compile(rf"(?i)^{SENSITIVE_FIELD_PATTERN}$")
@@ -71,6 +71,29 @@ def digest_bytes(value: bytes) -> str:
     return hashlib.sha256(value).hexdigest()
 
 
+def read_member(
+    archive: zipfile.ZipFile,
+    member: str | zipfile.ZipInfo,
+    budget: list[int] | None = None,
+    limit: int = MAX_ENTRY_BYTES,
+) -> bytes:
+    """Decompress one ZIP member in bounded chunks; declared header sizes are not trusted."""
+    name = member if isinstance(member, str) else member.filename
+    chunks: list[bytes] = []
+    size = 0
+    with archive.open(member) as handle:
+        while chunk := handle.read(1024 * 1024):
+            size += len(chunk)
+            if size > limit:
+                raise ValueError(f"capsule member exceeds {limit // (1024 * 1024)} MiB: {name}")
+            if budget is not None:
+                budget[0] += len(chunk)
+                if budget[0] > MAX_TOTAL_BYTES:
+                    raise ValueError("capsule expands beyond the 512 MiB comparison limit")
+            chunks.append(chunk)
+    return b"".join(chunks)
+
+
 def validate_capsule_archive(archive: zipfile.ZipFile) -> list[str]:
     """Validate a .dshc manifest and return its declared session members."""
     infos = archive.infolist()
@@ -96,8 +119,9 @@ def validate_capsule_archive(archive: zipfile.ZipFile) -> list[str]:
     names = seen
     if "manifest.json" not in names:
         raise ValueError("capsule has no manifest.json")
+    budget = [0]
     try:
-        manifest = json.loads(archive.read("manifest.json"))
+        manifest = json.loads(read_member(archive, "manifest.json", budget))
     except (UnicodeDecodeError, json.JSONDecodeError) as error:
         raise ValueError("capsule manifest is not valid UTF-8 JSON") from error
     if not isinstance(manifest, dict) or manifest.get("format") != "dsh-capsule" or manifest.get("version") != 1:
@@ -118,7 +142,7 @@ def validate_capsule_archive(archive: zipfile.ZipFile) -> list[str]:
         expected.add(name)
         if name not in names:
             raise ValueError(f"capsule manifest file is missing: {name}")
-        data = archive.read(name)
+        data = read_member(archive, name, budget)
         declared_bytes = record.get("bytes")
         declared_hash = record.get("sha256")
         if (
@@ -279,7 +303,7 @@ def load_text(source: Path, requested: str | None) -> tuple[str, str]:
                 if info.filename.endswith("session.jsonl") and info.filename not in candidates:
                     candidates.append(info.filename)
             member = choose_member(sorted(candidates), requested)
-            return member, archive.read(member).decode("utf-8")
+            return member, read_member(archive, member, None, MAX_LOG_BYTES).decode("utf-8")
     if requested:
         raise ValueError("--*-member can only be used with ZIP or .dshc input")
     if source.stat().st_size > MAX_LOG_BYTES:

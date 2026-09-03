@@ -35,7 +35,7 @@
 `oracle` 支持两种可复核形式：
 
 - `{"kind":"exact_response","expected":"..."}`：从原始事件重新提取最后一条可见 assistant 文本并精确比较；
-- `{"kind":"command_exit","command":"...","success_exit_codes":[0]}`：证据中必须保存相同命令、退出码、stdout 和 stderr。命令由会话外进程运行，不能采信 Agent 自报。
+- `{"kind":"command_exit","command":"...","success_exit_codes":[0]}`：证据中必须保存相同命令、退出码、stdout 和 stderr。命令由会话外的评测执行器运行，不能采信 Agent 自报；`eval-report` 审计只复核证据中记录的命令、退出码与哈希一致性，不会重新执行该命令。
 
 `results.jsonl` 每行记录：
 
@@ -70,7 +70,7 @@
 python3 <本 Skill 目录>/scripts/teach.py eval-report <候选 Skill>/eval --require-promotion
 ```
 
-该命令拒绝缺失 arm、缺失重复轮次、目录穿越、证据哈希或字段不一致、实际请求配置漂移、未知失败分类和不完整类别。它从事件重新计算最终回复、候选 Skill 加载、工具安全、Token 和耗时，并在 baseline 加载候选 Skill 时强制阻止晋级。`promoted: true` 只表示预先冻结的机器门槛通过，不能证明证据发布者身份，也不能替代对任务设计和原始证据的人工审查。
+该命令拒绝缺失 arm、缺失重复轮次、目录穿越、证据哈希或字段不一致、实际请求配置漂移、未知失败分类和不完整类别。它是完整性与一致性审计器：不重新执行 `command_exit` 命令，命令级验收以生成证据的评测执行器为准。它从事件重新计算最终回复、候选 Skill 加载、工具安全、Token 和耗时，并在 baseline 加载候选 Skill 时强制阻止晋级。`promoted: true` 只表示预先冻结的机器门槛通过，不能证明证据发布者身份，也不能替代对任务设计和原始证据的人工审查。
 
 ## 公平性控制
 

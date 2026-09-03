@@ -41,8 +41,8 @@ SECRET_PATTERNS = (
     (re.compile(r"\bxox[baprs]-[A-Za-z0-9-]{10,}\b"), "<REDACTED_SLACK_TOKEN>"),
     (re.compile(r"\beyJ[A-Za-z0-9_-]{4,}\.[A-Za-z0-9_-]{4,}\.[A-Za-z0-9_-]{4,}\b"), "<REDACTED_JWT>"),
     (
-        re.compile(rf"(?i)\b({SENSITIVE_FIELD_PATTERN})\s*[:=]\s*['\"]?[^\s'\",;]{{8,}}"),
-        r"\1=<REDACTED>",
+        re.compile(rf"(?i)\b({SENSITIVE_FIELD_PATTERN}['\"]?\s*[:=]\s*['\"]?)[^\s'\",;]{{8,}}"),
+        r"\1<REDACTED>",
     ),
 )
 SECRET_KEYS = re.compile(rf"(?i)^{SENSITIVE_FIELD_PATTERN}$")
@@ -97,6 +97,29 @@ def zip_is_symlink(info: zipfile.ZipInfo) -> bool:
     return stat.S_IFMT(info.external_attr >> 16) == stat.S_IFLNK
 
 
+def read_member(
+    archive: zipfile.ZipFile,
+    member: str | zipfile.ZipInfo,
+    budget: list[int] | None = None,
+    limit: int = MAX_ENTRY_BYTES,
+) -> bytes:
+    """Decompress one ZIP member in bounded chunks; declared header sizes are not trusted."""
+    name = member if isinstance(member, str) else member.filename
+    chunks: list[bytes] = []
+    size = 0
+    with archive.open(member) as handle:
+        while chunk := handle.read(1024 * 1024):
+            size += len(chunk)
+            if size > limit:
+                raise ValueError(f"capsule member exceeds {limit // (1024 * 1024)} MiB: {name}")
+            if budget is not None:
+                budget[0] += len(chunk)
+                if budget[0] > MAX_TOTAL_BYTES:
+                    raise ValueError("capsule expands beyond the 512 MiB analysis limit")
+            chunks.append(chunk)
+    return b"".join(chunks)
+
+
 def validate_capsule_archive(source: Path) -> None:
     """Validate a .dshc manifest before reading any session log from it."""
     with zipfile.ZipFile(source) as archive:
@@ -122,8 +145,9 @@ def validate_capsule_archive(source: Path) -> None:
             names.add(info.filename)
         if "manifest.json" not in names:
             raise ValueError("capsule has no manifest.json")
+        budget = [0]
         try:
-            manifest = json.loads(archive.read("manifest.json"))
+            manifest = json.loads(read_member(archive, "manifest.json", budget))
         except (UnicodeDecodeError, json.JSONDecodeError) as error:
             raise ValueError("capsule manifest is not valid UTF-8 JSON") from error
         if not isinstance(manifest, dict) or manifest.get("format") != "dsh-capsule" or manifest.get("version") != 1:
@@ -143,7 +167,7 @@ def validate_capsule_archive(source: Path) -> None:
             expected.add(name)
             if name not in names:
                 raise ValueError(f"capsule manifest file is missing: {name}")
-            data = archive.read(name)
+            data = read_member(archive, name, budget)
             declared_bytes = record.get("bytes")
             declared_hash = record.get("sha256")
             if (
@@ -180,6 +204,7 @@ def load_logs(source: Path) -> list[tuple[str, str]]:
     if zipfile.is_zipfile(source):
         logs: list[tuple[str, str]] = []
         total = 0
+        budget = [0]
         with zipfile.ZipFile(source) as archive:
             infos = archive.infolist()
             if len(infos) > MAX_ARCHIVE_FILES:
@@ -202,7 +227,7 @@ def load_logs(source: Path) -> list[tuple[str, str]]:
                 total += info.file_size
                 if total > MAX_TOTAL_BYTES:
                     raise ValueError("session logs exceed the 512 MiB analysis limit")
-                logs.append((info.filename, archive.read(info).decode("utf-8")))
+                logs.append((info.filename, read_member(archive, info, budget, MAX_LOG_BYTES).decode("utf-8")))
         if not logs:
             raise ValueError("archive contains no session.jsonl")
         return logs
@@ -770,6 +795,7 @@ def evidence_elapsed_ms(events: list[dict[str, Any]]) -> int:
 
 
 def evidence_oracle_pass(task: dict[str, Any], evidence: dict[str, Any], events: list[dict[str, Any]]) -> bool:
+    """Audit the recorded oracle result; a command_exit command is never re-executed here."""
     oracle = task["oracle"]
     if oracle["kind"] == "exact_response":
         return evidence_visible_response(events) == oracle["expected"]

@@ -5,6 +5,7 @@ import importlib.util
 import json
 import zipfile
 from argparse import Namespace
+from collections import Counter
 from pathlib import Path
 
 import pytest
@@ -123,6 +124,57 @@ def test_capsule_verify_rejects_tampered_log(tmp_path: Path) -> None:
             replacement.writestr(info, data)
     with pytest.raises(ValueError, match="hash mismatch"):
         capsule.load_and_verify(tampered)
+
+
+def test_named_secret_redaction_matches_quoted_json_keys() -> None:
+    json_payload = '{"client_secret": "supersecretvalue123", "password":"hunter2hunter2"}'
+    payload = json_payload + ' aws_secret_access_key = "AKIAlikevalue999"'
+    scrubbed_by_capsule = capsule.scrub_string(payload, Counter(), False, [])
+    scrubbed_by_teach = teach.PreviewRedactor([], [], []).scrub(payload)
+    scrubbed_by_compare = compare.scrub(payload)
+    for scrubbed in (scrubbed_by_capsule, scrubbed_by_teach, scrubbed_by_compare):
+        assert "supersecretvalue123" not in scrubbed
+        assert "hunter2hunter2" not in scrubbed
+        assert "AKIAlikevalue999" not in scrubbed
+        assert "<REDACTED>" in scrubbed
+
+    scrubbed_json_values = (
+        capsule.scrub_string(json_payload, Counter(), False, []),
+        teach.PreviewRedactor([], [], []).scrub(json_payload),
+        compare.scrub(json_payload),
+    )
+    for scrubbed_json in scrubbed_json_values:
+        assert json.loads(scrubbed_json) == {
+            "client_secret": "<REDACTED>",
+            "password": "<REDACTED>",
+        }
+
+
+def test_read_member_bounds_actual_decompressed_bytes(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    archive_path = tmp_path / "expansive.zip"
+    with zipfile.ZipFile(archive_path, "w", zipfile.ZIP_DEFLATED) as archive:
+        archive.writestr("session.jsonl", "a" * 4096)
+    monkeypatch.setattr(capsule, "MAX_ENTRY_BYTES", 1024)
+    with zipfile.ZipFile(archive_path) as archive:
+        with pytest.raises(ValueError, match="exceeds"):
+            capsule.read_member(archive, "session.jsonl")
+        with pytest.raises(ValueError, match="exceeds"):
+            teach.read_member(archive, "session.jsonl", None, 1024)
+        with pytest.raises(ValueError, match="exceeds"):
+            compare.read_member(archive, "session.jsonl", None, 1024)
+
+
+def test_read_member_budget_bounds_total_decompressed_bytes(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    archive_path = tmp_path / "total.zip"
+    with zipfile.ZipFile(archive_path, "w", zipfile.ZIP_DEFLATED) as archive:
+        archive.writestr("first.jsonl", "a" * 3000)
+        archive.writestr("second.jsonl", "b" * 3000)
+    monkeypatch.setattr(capsule, "MAX_TOTAL_BYTES", 4096)
+    with zipfile.ZipFile(archive_path) as archive:
+        budget = [0]
+        capsule.read_member(archive, "first.jsonl", budget)
+        with pytest.raises(ValueError, match="expands beyond"):
+            capsule.read_member(archive, "second.jsonl", budget)
 
 
 def test_teach_preview_redacts_identifiers_email_and_url(tmp_path: Path) -> None:

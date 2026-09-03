@@ -46,8 +46,8 @@ SECRET_PATTERNS = (
     ),
     (
         "named_secret",
-        re.compile(rf"(?i)\b({SENSITIVE_FIELD_PATTERN})\s*[:=]\s*['\"]?[^\s'\",;]{{8,}}"),
-        r"\1=<REDACTED>",
+        re.compile(rf"(?i)\b({SENSITIVE_FIELD_PATTERN}['\"]?\s*[:=]\s*['\"]?)[^\s'\",;]{{8,}}"),
+        r"\1<REDACTED>",
     ),
 )
 HOME_PATTERNS = (
@@ -80,6 +80,24 @@ def validate_member_name(name: str) -> None:
 
 def zip_is_symlink(info: zipfile.ZipInfo) -> bool:
     return stat.S_IFMT(info.external_attr >> 16) == stat.S_IFLNK
+
+
+def read_member(archive: zipfile.ZipFile, member: str | zipfile.ZipInfo, budget: list[int] | None = None) -> bytes:
+    """Decompress one ZIP member in bounded chunks; declared header sizes are not trusted."""
+    name = member if isinstance(member, str) else member.filename
+    chunks: list[bytes] = []
+    size = 0
+    with archive.open(member) as handle:
+        while chunk := handle.read(1024 * 1024):
+            size += len(chunk)
+            if size > MAX_ENTRY_BYTES:
+                raise ValueError(f"archive member exceeds 128 MiB: {name}")
+            if budget is not None:
+                budget[0] += len(chunk)
+                if budget[0] > MAX_TOTAL_BYTES:
+                    raise ValueError("archive expands beyond 512 MiB")
+            chunks.append(chunk)
+    return b"".join(chunks)
 
 
 def checked_infos(archive: zipfile.ZipFile) -> list[zipfile.ZipInfo]:
@@ -251,14 +269,17 @@ def read_source(source: Path, include_media: bool) -> tuple[list[tuple[str, list
         raise ValueError(f"input archive exceeds {MAX_ARCHIVE_BYTES // (1024 * 1024)} MiB")
     if zipfile.is_zipfile(source):
         with zipfile.ZipFile(source) as archive:
+            budget = [0]
             for info in checked_infos(archive):
                 if info.filename.endswith("session.jsonl"):
-                    logs.append((info.filename, parse_jsonl(info.filename, archive.read(info).decode("utf-8"))))
+                    logs.append(
+                        (info.filename, parse_jsonl(info.filename, read_member(archive, info, budget).decode("utf-8")))
+                    )
                 elif include_media and (info.filename.startswith("media/") or "/media/" in info.filename):
                     media_name = "media/" + PurePosixPath(info.filename).name
                     if media_name in media:
                         raise ValueError(f"media filename collision: {media_name}")
-                    media[media_name] = archive.read(info)
+                    media[media_name] = read_member(archive, info, budget)
     else:
         if source.stat().st_size > MAX_ENTRY_BYTES:
             raise ValueError("session JSONL exceeds 128 MiB")
@@ -474,8 +495,10 @@ def load_and_verify(capsule: Path) -> tuple[dict[str, Any], dict[str, bytes]]:
         names = {info.filename for info in infos}
         if "manifest.json" not in names:
             raise ValueError("capsule has no manifest.json")
+        budget = [0]
+        manifest_data = read_member(archive, "manifest.json", budget)
         try:
-            manifest = json.loads(archive.read("manifest.json"))
+            manifest = json.loads(manifest_data)
         except (UnicodeDecodeError, json.JSONDecodeError) as error:
             raise ValueError("manifest.json is not valid UTF-8 JSON") from error
         if not isinstance(manifest, dict) or manifest.get("format") != FORMAT or manifest.get("version") != VERSION:
@@ -499,7 +522,7 @@ def load_and_verify(capsule: Path) -> tuple[dict[str, Any], dict[str, bytes]]:
             expected_names.add(name)
             if name not in names:
                 raise ValueError(f"manifest file is missing from ZIP: {name}")
-            data = archive.read(name)
+            data = read_member(archive, name, budget)
             declared_bytes = record.get("bytes")
             declared_hash = record.get("sha256")
             if (
@@ -515,7 +538,7 @@ def load_and_verify(capsule: Path) -> tuple[dict[str, Any], dict[str, bytes]]:
             extra = sorted(names - expected_names - {"manifest.json"})
             missing = sorted(expected_names - names)
             raise ValueError(f"ZIP/manifest file-set mismatch; extra={extra}, missing={missing}")
-        contents["manifest.json"] = archive.read("manifest.json")
+        contents["manifest.json"] = manifest_data
         return manifest, contents
 
 
